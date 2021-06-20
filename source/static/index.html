@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="e_learning">
+<head>
+    <script src="assets/js/angular.min.js"></script>
+    <script src="assets/js/angular-ui-router.min.js"></script>
+    <script src="assets/js/ocLazyLoad.min.js"></script>
+    <!-- <script src="assets/js/angular-route.js"></script> -->
+    <div ng-include="'static/include/head.html'"></div>
+</head>
+<body data-ma-header="teal">
+    <base href="/"></base>
+    <div ng-include="'static/include/header.html'"></div>
+    <ui-view></ui-view>
+    <!-- <div ng-view></div> -->
+    <div ng-include="'static/include/footer.html'"></div>
+
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/app_routing.js"></script>
+</body>
+</html>

@@ -1,0 +1,268 @@
+<section id="main">
+    <aside id="s-main-menu" class="sidebar">
+        <div class="smm-header">
+            <i class="zmdi zmdi-long-arrow-left" data-ma-action="sidebar-close"></i>
+        </div>
+
+        <ul class="smm-alerts">
+            <li class="" data-user-alert="sua-messages" data-ma-action="sidebar-open" data-ma-target="user-alerts">
+                <i class="zmdi zmdi-account"></i>
+            </li>
+            <span style="color:white;font-size:25px;">Hi!</span>
+        </ul>
+
+        <ul class="main-menu">
+            <li>
+                <a href="/"><i class="zmdi zmdi-view-dashboard"></i> Dashboard</a>
+            </li>
+            <li class="sub-menu">
+                <a href="" data-ma-action="submenu-toggle"><i class="zmdi zmdi-collection-video"></i> Courses</a>
+                <ul>
+                    <li><a href="/add_course">Add New Course</a></li>
+                    <li class="active"><a href="/pending_courses">Pending Courses</a></li> 
+                    <li><a href="/active_courses">Active Courses</a></li>
+                    <li><a href="/deactivated_courses">Deactivated Courses</a></li>
+                </ul>
+            </li>
+            <li><a href="/my_profile"><i class="zmdi zmdi-account-circle"></i> My Profile</a></li>
+            <li><a href="/enrollments"><i class="zmdi zmdi-accounts-add"></i> Enrollments</a></li>
+            <li><a href=""><i class="zmdi zmdi-power zmdi-hc-fw"></i> Logout</a></li>
+        </ul>
+    </aside>
+
+    <section id="content">
+        <div class="card">
+            <div class="row">
+                <div class="card-header">
+                    <div class="col-lg-11 col-xl-11">
+                        <h2>Course details</h2>
+                    </div>
+                    <div class="col-lg-1 col-xl-1">
+                        <div class="row">
+                            <div class="col-lg-6 col-xl-6">
+                                <button class='btn btn-success bg waves-effect' ng-click='toggleReadonly(1)'><i  class='zmdi zmdi-edit zmdi-hc-fw'></i></button>
+                            </div>
+                            <div class="col-lg-6 col-xl-6">
+                                <button class='btn btn-success bg waves-effect' ng-click='toggleReadonly(0)'><i  class='zmdi zmdi-eye zmdi-hc-fw'></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body card-padding">
+                <div id="course" class="row">
+                    <div class='col-lg-4 col-xl-4'>
+                        <img style='height:170px' ng-model='course.course_img_thumbnail' alt='Course thumbnail' src='http://localhost:8080/{{course.course_img_thumbnail}}' alt=''> 
+                    </div>
+                    <form ng-submit="edit_course()" id='course_d'>
+                        <input type='hidden' name='course_img_thumbnail'>
+                        <div class='col-lg-7 col-xl-7'>
+                            <div class='row'>
+                                <div class='col-lg-6 col-xl-6'>
+                                    <div class='form-group fg-line'>
+                                        <input name="course_id" type="hidden" ng-model='course.course_id'>
+                                        <input {{readonly}} type='text' ng-model='course.course_name' name='course_name' class='form-control input-sm edit_c' placeholder='Enter course name'>
+                                    </div>
+                                </div>
+                                <div class='col-lg-3 col-xl-3'>
+                                    <div class='input-group'>
+                                        <span class='input-group-addon'>
+                                            <h4>₹</h4>
+                                        </span>
+                                        <div class='fg-line'>
+                                            <input {{readonly}} type='number' ng-model='course.course_fees' name='course_fees' class='form-control input-sm edit_c' placeholder='Enter course fees'>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class='col-lg-3 col-xl-3'>
+                                    <div class='input-group'>
+                                        <span class='input-group-addon'>
+                                            <i class='zmdi zmdi-time zmdi-hc-fw'></i>
+                                        </span>
+                                    <div class='fg-line'>
+                                        <input {{readonly}} type='text' ng-model='course.duration' name='duration' class='form-control input-sm edit_c' placeholder='Enter course duration'>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class='row'>
+                                <div class='col-lg-12 col-xl-12'>
+                                    <div class='form-group fg-line'>
+                                        <input {{readonly}} type='text' ng-model='course.course_description' name='course_description' class='form-control input-sm edit_c' placeholder='Enter course description'>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class='row'>
+                                <div class='col-lg-10 col-xl-10'>
+                                </div>
+                                <div class='col-lg-2 col-xl-2'>
+                                    <button {{disabled}} type='submit' id='update_c' class='btn btn-primary bg waves-effect'>Update</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-lg-11 col-xl-11">
+                        <h2>Videos</h2>
+                    </div>
+                    <!-- Modal- add vdo btn -->
+                    <div class="col-lg-1 col-xl-1">
+                        <button class='btn btn-success bg waves-effect' data-toggle="modal" data-target="#exampleModal3"><i  class='zmdi zmdi-plus-circle zmdi-hc-fw'></i></button>                        
+                    </div>
+                    <div class="modal" id="exampleModal3">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Add video</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form ng-submit="add_video()" role="form" id="video_info">
+                                        <div class="form-group fg-line">
+                                            <input name="video_title" type="text" ng-model="details_v.video_title" id="v_name" class="form-control input-sm" placeholder="Enter video title">
+                                        </div>
+                                        <div type="text" class="form-group fg-line">
+                                            <textarea name="video_description" ng-model="details_v.video_description" id="description" rows="5" class="form-control input-sm" placeholder="Enter video description"></textarea>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xl-6 col-lg-6">
+                                                <div class="form-group fg-line">
+                                                    <input name="video_thumbnail" ng-model="details_v.video_thumbnail" type="hidden" id="f_t_path" class="form-control input-sm" placeholder="Enter here">
+                                                </div>
+                                                <div class="form-group fg-line">
+                                                    <input type="file" id="t_upload" class="form-control input-sm" onchange='angular.element(this).scope().add_file()' placeholder="Thumbnail">Add thumbnail
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6">
+                                                <div class="form-group fg-line">
+                                                    <input name="video_path" type="hidden"ng-model="details_v.video_path" id="f_v_path" class="form-control input-sm" placeholder="Enter here">
+                                                </div>
+                                                <div class="form-group fg-line">
+                                                    <input type="file" id="v_upload" class="form-control input-sm" onchange='angular.element(this).scope().add_videoclip()' placeholder="Video">Add video
+                                                </div>
+                                                <div>
+                                                    <input name="course_id" type="hidden" ng-model="course_id">
+                                                    <input name="created_by" type="hidden" value="40">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group fg-line">
+                                            <button type="submit" class="btn btn-primary bg waves-effect">Save</button>
+                                        </div>
+                                    </form>                                        
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /Modal- add vdo btn -->
+                </div>
+            </div>
+
+            <div ng-repeat="value in videos" class="card-body card-padding">
+                <div class="row">  
+                    <div id="video" class="col-lg-12 col-xl-12">
+                        <div class='row'>
+                            <div class='col-lg-4 col-xl-4'>
+                                <img style='height:170px' data-toggle='modal' data-target='#exampleModal5' src='http://localhost:8080/{{value.video_thumbnail}}' alt=''>
+                            </div>
+                            <div class='col-lg-7 col-xl-7'>
+                                <div class='row'>
+                                    <div class='col-lg-12 col-xl-12'>
+                                        <h3>{{value.video_title}}</h3>
+                                    </div>
+                                    <div class='col-lg-12 col-xl-12'>
+                                        <h5>{{value.video_description}}</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class='col-lg-1 col-xl-1'>
+                                <div class='row'>
+                                    <button class='btn btn-primary bg waves-effect' ng-click='edit_v(value)' data-toggle='modal' data-target='#exampleModal2'><i  class='zmdi zmdi-edit zmdi-hc-fw'></i></button>
+                                    <button class='btn btn-danger bg waves-effect' ng-click='delete_video(value.id)'><i  class='zmdi zmdi-delete zmdi-hc-fw'></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+
+                        <!-- vdo Modal -->
+                        <div class="modal" id="exampleModal5">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Modal title</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Curabitur blandit mollis lacus. Nulla sit amet est. Suspendisse nisl elit, rhoncus eget, elementum ac, condimentum eget, diam. Donec mi odio, faucibus at, scelerisque quis, convallis in, nisi. Cras sagittis.</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" data-target-color="blue" data-toggle="modal" class="btn palette-Blue bg">Save</button>
+                                        <button type="button" data-target-color="bluegray" data-toggle="modal" class="btn palette-Blue-Grey bg" data-dismiss="modal">Cancel</button>                                            </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /vdo Modal -->
+                    </div>
+                    <!-- Modal- edit btn -->
+                    <div class="modal" id="exampleModal2">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Edit video</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form ng-submit="edit_video()" role="form" id="video_edit">
+                                        <div class="form-group fg-line">
+                                            <input name="video_title" type="text" ng-model="data.video_title" id="v_title" class="form-control input-sm" placeholder="Enter video title">
+                                        </div>
+                                        <div type="text" class="form-group fg-line">
+                                            <textarea name="video_description" type="text" ng-model="data.video_description" id="v_description" rows="5" class="form-control input-sm" placeholder="Enter video description"></textarea>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xl-6 col-lg-6">
+                                                <div class="form-group fg-line">
+                                                    <input name="video_thumbnail" type="hidden" ng-model="data.video_thumbnail" id="thumbnail_path" class="form-control input-sm" placeholder="Enter here">
+                                                </div>
+                                                <div class="form-group fg-line">
+                                                    <input type="file" id="thumbnail_upload" class="form-control input-sm"   onchange='add_thumbnail()' placeholder="Thumbnail">Add thumbnail
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6">
+                                                <div class="form-group fg-line">
+                                                    <input name="video_path" type="hidden" ng-model="data.video_path" id="video_path" class="form-control input-sm" placeholder="Enter here">
+                                                </div>
+                                                <div class="form-group fg-line">
+                                                    <input type="file" id="video_upload" class="form-control input-sm"   onchange='add_videoclip()' placeholder="Video">Add video
+                                                </div>
+                                                <div>
+                                                    <input name="created_by" type="hidden" value="40">
+                                                    <input type="hidden" id="v_id">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group fg-line">
+                                            <button type="submit" class="btn btn-primary bg waves-effect">Update</button>
+                                        </div>
+                                    </form>                                        
+                                </div>
+                                <!-- <div class="modal-footer">
+                                    <button type="button" data-target-color="blue" data-toggle="modal" class="btn palette-Blue bg">Save</button>
+                                    <button type="button" data-target-color="red" data-toggle="modal" class="btn palette-Blue-Grey bg" data-dismiss="modal">Cancel</button>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /Modal- edit btn -->
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+
+<!-- Javascript Libraries -->
+<script type="text/javascript-lazy" src="assets/js/functions.js"></script>
+<script type="text/javascript-lazy" src="assets/js/actions.js"></script>
+<script type="text/javascript-lazy" src="assets/js/demo.js"></script>

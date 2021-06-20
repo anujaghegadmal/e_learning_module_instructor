@@ -1,0 +1,95 @@
+<section id="main">
+    <aside id="s-main-menu" class="sidebar">
+        <div class="smm-header">
+            <i class="zmdi zmdi-long-arrow-left" data-ma-action="sidebar-close"></i>
+        </div>
+
+        <ul class="smm-alerts">
+            <li class="" data-user-alert="sua-messages" data-ma-action="sidebar-open" data-ma-target="user-alerts">
+                <i class="zmdi zmdi-account"></i>
+            </li>
+            <span style="color:white;font-size:25px;">Hi!</span>
+        </ul>
+
+        <ul class="main-menu">
+            <li>
+                <a href="/"><i class="zmdi zmdi-view-dashboard"></i> Dashboard</a>
+            </li>
+            <li class="sub-menu active">
+                <a href="" data-ma-action="submenu-toggle"><i class="zmdi zmdi-collection-video"></i> Courses</a>
+                <ul>
+                    <li><a href="/add_course">Add New Course</a></li>
+                    <li><a href="/pending_courses">Pending Courses</a></li> 
+                    <li class="active"><a href="/active_courses">Active Courses</a></li>
+                    <li><a href="/deactivated_courses">Deactivated Courses</a></li>
+                </ul>
+            </li>
+            <li><a href="/my_profile"><i class="zmdi zmdi-account-circle"></i> My Profile</a></li>
+            <li><a href="/enrollments"><i class="zmdi zmdi-accounts-add"></i> Enrollments</a></li>
+            <li><a href=""><i class="zmdi zmdi-power zmdi-hc-fw"></i> Logout</a></li>
+        </ul>
+    </aside>
+
+    <section id="content">
+        <div class="container">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Active Courses</h2>
+                </div>
+
+                <table id="data-table-command" class="table table-striped table-vmiddle">
+                    <!-- <thead>
+                        <tr>
+                            <th data-column-id="id" data-type="numeric">ID</th>
+                            <th data-column-id="sender">Sender</th>
+                            <th data-column-id="received" data-order="desc">Received</th>
+                            <th data-column-id="commands" data-formatter="commands" data-sortable="false">Commands</th>
+                        </tr>
+                    </thead> -->
+                    
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th></th>
+                            <th>course name</th>
+                            <th>course description</th>
+                            <th>course fees</th>
+                            <th>duration</th>
+                            <th>status</th>
+                        </tr>
+                    </thead>
+                        <tbody id="tableBody">
+                            <!-- <tr>
+                                <td colspan="8">
+                                    <center>
+                                        <div class="preloader pls-gray pl-xxl">
+                                            <svg class="pl-circular" viewBox="25 25 50 50">
+                                                <circle class="plc-path" cx="50" cy="50" r="20" />
+                                            </svg>
+                                        </div>
+                                    </center>
+                                </td>
+                            </tr> -->
+                            <tr ng-repeat="course in a_courses">
+                                <td>{{course.id}}</td>
+                                <td><img src='http://localhost:8080/{{course.course_img_thumbnail}}' style='height: 50px; width: 70px;'></img>
+                                <td>{{course.course_name}}</td>                                   
+                                <td>{{course.course_description}}</td>
+                                <td>₹ {{course.course_fees}}</td>
+                                <td>{{course.duration}}</td>
+                                <td>{{course.status}}</td>
+                                <td><button class='btn btn-primary bg waves-effect'><i  class='zmdi zmdi-chart zmdi-hc-fw'></i></button></td>
+                                <td><button class='btn btn-danger bg waves-effect' ng-click='deactivate_course(course.id)'><i  class='zmdi zmdi-delete zmdi-hc-fw'></i></button></td>
+                            </tr>
+                        </tbody>
+                </table>
+                          
+            </div>
+        </div>
+    </section>
+</section>
+
+<!-- Javascript Libraries -->
+<script type="text/javascript-lazy" src="assets/js/functions.js"></script>
+<script type="text/javascript-lazy" src="assets/js/actions.js"></script>
+<script type="text/javascript-lazy" src="assets/js/demo.js"></script>
