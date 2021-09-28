@@ -26,7 +26,7 @@
             </li>
             <li><a href="/my_profile"><i class="zmdi zmdi-account-circle"></i> My Profile</a></li>
             <li><a href="/enrollments"><i class="zmdi zmdi-accounts-add"></i> Enrollments</a></li>
-            <li><a href=""><i class="zmdi zmdi-power zmdi-hc-fw"></i> Logout</a></li>
+            <li><a href="http://localhost:8580/login" ng-click="logout()"><i class="zmdi zmdi-power zmdi-hc-fw"></i> Logout</a></li>
         </ul>
     </aside>
 
@@ -40,11 +40,11 @@
                     <div class="col-lg-1 col-xl-1">
                         <div class="row">
                             <div class="col-lg-6 col-xl-6">
-                                <button class='btn btn-success bg waves-effect' ng-click='toggleReadonly(1)'><i  class='zmdi zmdi-edit zmdi-hc-fw'></i></button>
+                                <button class='btn btn-success bg waves-effect' ng-disabled="edit" ng-click="toggleReadonly('enable')"><i  class='zmdi zmdi-edit zmdi-hc-fw'></i></button>
                             </div>
                             <div class="col-lg-6 col-xl-6">
-                                <button class='btn btn-success bg waves-effect' ng-click='toggleReadonly(0)'><i  class='zmdi zmdi-eye zmdi-hc-fw'></i></button>
-                            </div>
+                                <button class='btn btn-success bg waves-effect' ng-disabled="view" ng-click="toggleReadonly('disable')"><i  class='zmdi zmdi-eye zmdi-hc-fw'></i></button>
+                            </div> 
                         </div>
                     </div>
                 </div>
@@ -62,7 +62,7 @@
                                 <div class='col-lg-6 col-xl-6'>
                                     <div class='form-group fg-line'>
                                         <input name="course_id" type="hidden" ng-model='course.course_id'>
-                                        <input {{readonly}} type='text' ng-model='course.course_name' name='course_name' class='form-control input-sm edit_c' placeholder='Enter course name'>
+                                        <input type='text' ng-model='course.course_name' ng-disabled="is_disabled" name='course_name' class='form-control input-sm' placeholder='Enter course name'>
                                     </div>
                                 </div>
                                 <div class='col-lg-3 col-xl-3'>
@@ -71,24 +71,25 @@
                                             <h4>₹</h4>
                                         </span>
                                         <div class='fg-line'>
-                                            <input {{readonly}} type='number' ng-model='course.course_fees' name='course_fees' class='form-control input-sm edit_c' placeholder='Enter course fees'>
+                                            <input type='number' ng-model='course.course_fees' ng-disabled="is_disabled" name='course_fees' class='form-control input-sm' placeholder='Enter course fees'>
                                         </div>
                                     </div>
                                 </div>
                                 <div class='col-lg-3 col-xl-3'>
                                     <div class='input-group'>
                                         <span class='input-group-addon'>
-                                            <i class='zmdi zmdi-time zmdi-hc-fw'></i>
+                                            <i ng-disabled="is_disabled" class='zmdi zmdi-time zmdi-hc-fw'></i>
                                         </span>
                                     <div class='fg-line'>
-                                        <input {{readonly}} type='text' ng-model='course.duration' name='duration' class='form-control input-sm edit_c' placeholder='Enter course duration'>
+                                        <input type='text' ng-model='course.duration' ng-disabled="is_disabled" name='duration' class='form-control input-sm' placeholder='Enter course duration'>
                                     </div>
                                 </div>
                             </div>
                             <div class='row'>
-                                <div class='col-lg-12 col-xl-12'>
+                                <div class='col-lg-1 col-xl-1'></div>
+                                <div class='col-lg-11 col-xl-11' style="margin-left: 15px;">
                                     <div class='form-group fg-line'>
-                                        <input {{readonly}} type='text' ng-model='course.course_description' name='course_description' class='form-control input-sm edit_c' placeholder='Enter course description'>
+                                        <input type='text' ng-model='course.course_description' ng-disabled="is_disabled" name='course_description' class='form-control input-sm' placeholder='Enter course description'>
                                     </div>
                                 </div>
                             </div>
@@ -96,7 +97,7 @@
                                 <div class='col-lg-10 col-xl-10'>
                                 </div>
                                 <div class='col-lg-2 col-xl-2'>
-                                    <button {{disabled}} type='submit' id='update_c' class='btn btn-primary bg waves-effect'>Update</button>
+                                    <button type='submit' id='update_c' ng-disabled="update" class='btn btn-primary bg waves-effect'>Update</button>
                                 </div>
                             </div>
                         </div>
@@ -131,23 +132,23 @@
                                         <div class="row">
                                             <div class="col-xl-6 col-lg-6">
                                                 <div class="form-group fg-line">
-                                                    <input name="video_thumbnail" ng-model="details_v.video_thumbnail" type="hidden" id="f_t_path" class="form-control input-sm" placeholder="Enter here">
+                                                    <input name="video_thumbnail" ng-model="details_v.video_thumbnail" type="hidden" id="video_thumbnail" class="form-control input-sm" placeholder="Enter here">
                                                 </div>
                                                 <div class="form-group fg-line">
-                                                    <input type="file" id="t_upload" class="form-control input-sm" onchange='angular.element(this).scope().add_file()' placeholder="Thumbnail">Add thumbnail
+                                                    <input type="file" id="t_upload" class="form-control input-sm" onchange='angular.element(this).scope().add_v_thumbnail()' placeholder="Thumbnail">Add thumbnail
                                                 </div>
                                             </div>
                                             <div class="col-xl-6 col-lg-6">
                                                 <div class="form-group fg-line">
-                                                    <input name="video_path" type="hidden"ng-model="details_v.video_path" id="f_v_path" class="form-control input-sm" placeholder="Enter here">
+                                                    <input name="video_path" type="hidden"ng-model="details_v.video_path" id="video_path" class="form-control input-sm" placeholder="Enter here">
                                                 </div>
                                                 <div class="form-group fg-line">
                                                     <input type="file" id="v_upload" class="form-control input-sm" onchange='angular.element(this).scope().add_videoclip()' placeholder="Video">Add video
                                                 </div>
-                                                <div>
+                                                <!-- <div>
                                                     <input name="course_id" type="hidden" ng-model="course_id">
                                                     <input name="created_by" type="hidden" value="40">
-                                                </div>
+                                                </div> -->
                                             </div>
                                         </div>
                                         <div class="form-group fg-line">

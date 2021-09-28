@@ -14036,7 +14036,7 @@ html:not(.ie9) .select.fg-line:before {
 }
 
 .lb-header i {
-  font-size: 40px;
+  font-size: 20px;
 }
 
 .lb-body {
@@ -14976,7 +14976,7 @@ html:not(.ie9) .select.fg-line:before {
  */
 
 .c-header {
-  margin-bottom: 25px;
+  margin-bottom: -40px;
   position: relative;
 }
 
@@ -14992,15 +14992,15 @@ html:not(.ie9) .select.fg-line:before {
   }
 }
 
-.c-header > h2 {
-  font-size: 15px;
+.c-header > h1 {
+  font-size: 20px;
   color: #fff;
   margin: 0;
   font-weight: 400;
   text-transform: uppercase;
 }
 
-.c-header > h2 > small {
+.c-header > h1 > small {
   display: block;
   text-transform: none;
   margin-top: 8px;

@@ -41,3 +41,19 @@ def login_in():
         
     except Exception as e:
         return make_response({"Error":str(e)},500)
+
+@app.route("/register")
+def register():
+    try:
+        return send_file(app.root_path+"/static/register.html")
+        
+    except Exception as e:
+        return make_response({"Error":str(e)},500)
+
+@app.route("/forget_password")
+def forget_password():
+    try:
+        return send_file(app.root_path+"/static/forget_password.html")
+        
+    except Exception as e:
+        return make_response({"Error":str(e)},500)

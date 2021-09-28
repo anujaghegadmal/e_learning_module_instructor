@@ -23,8 +23,7 @@ def token_authenticator(expected_role=""):
                     if token_data["data"]["role"] in expected_role:
                         return fun(*args,**kwargs)
                     else:
-                        return make_response({"Error":"Invalid Role"},403)
-                    
+                        return make_response({"Error":"Invalid Role"},403)    
                 else:
                     return make_response({"Error":"Invalid Token"})
             except Exception as e:

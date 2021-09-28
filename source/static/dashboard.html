@@ -11,7 +11,7 @@
             <span style="color:white;font-size:25px;">Hi!</span>
         </ul>
 
-        <ul class="main-menu">
+        <ul class="main-menu" ng-controller="login_ctrl">
             <li class="active">
                 <a href="/"><i class="zmdi zmdi-view-dashboard"></i> Dashboard</a>
             </li>
@@ -27,7 +27,7 @@
             </li>
             <li><a href="/my_profile"><i class="zmdi zmdi-account-circle"></i> My Profile</a></li>
             <li><a href="/enrollments"><i class="zmdi zmdi-accounts-add"></i> Enrollments</a></li>
-            <li><a href=""><i class="zmdi zmdi-power zmdi-hc-fw"></i> Logout</a></li>
+            <li><a href="" ng-click="logout()"><i class="zmdi zmdi-power zmdi-hc-fw"></i> Logout</a></li>
         </ul>
     </aside>
 

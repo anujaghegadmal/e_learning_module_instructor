@@ -26,7 +26,7 @@
             </li>
             <li><a href="/my_profile"><i class="zmdi zmdi-account-circle"></i> My Profile</a></li>
             <li><a href="/enrollments"><i class="zmdi zmdi-accounts-add"></i> Enrollments</a></li>
-            <li><a href=""><i class="zmdi zmdi-power zmdi-hc-fw"></i> Logout</a></li>
+            <li><a href="http://localhost:8580/login" ng-click="logout()"><i class="zmdi zmdi-power zmdi-hc-fw"></i> Logout</a></li>
         </ul>
     </aside>
 
@@ -86,7 +86,7 @@
                                 <p><em>Image preview only works in IE10+, FF3.6+, Safari6.0+, Chrome6.0+ and Opera11.1+. In older browsers the filename is shown instead.</em></p>
                             </div> -->
                             <div class="form-group fg-line">
-                                <input required type="file" id="f_upload" class="form-control input-sm" onchange='angular.element(this).scope().add_file()' placeholder="Upload your file here">
+                                <input required type="file" id="f_upload" class="form-control input-sm" onchange='angular.element(this).scope().add_c_thumbnail()' placeholder="Upload your file here">
                             </div>
                             <div class="form-group fg-line">
                                 <button type="submit" class="btn btn-primary bg waves-effect">Submit</button>

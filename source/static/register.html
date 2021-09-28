@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="e_learning">
+<head>
+    <script src="assets/js/angular.min.js"></script>
+    <script src="assets/js/angular-ui-router.min.js"></script>
+    <script src="assets/js/ocLazyLoad.min.js"></script>
+    <!-- <script src="assets/js/angular-route.js"></script> -->
+    <div ng-include="'static/include/head.html'"></div>
+</head>
+<body>
+    <base href="/"></base>
+    <div ng-controller="login_ctrl" class="login" data-lbg="teal">
+        <!-- Login -->
+        <div class="l-block toggled" id="l-login">
+            <div class="lb-header palette-Teal bg">
+                <i class="zmdi zmdi-account-circle"></i>
+                <h3 style="color: white;">Register here!</h3>
+            </div>
+
+            <div class="lb-body">
+                <form ng-submit="register()" role="form" id="login">
+                    <div class="form-group fg-float">
+                        <div class="fg-line">
+                            <input type="text" ng-model="register_c.name" name="name" class="input-sm form-control fg-input">
+                            <label class="fg-label">Enter Your Name</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group fg-float">
+                        <div class="fg-line">
+                            <input type="text" ng-model="register_c.phone_no" name="phone_no" class="input-sm form-control fg-input">
+                            <label class="fg-label">Enter Phone Number</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group fg-float">
+                        <div class="fg-line">
+                            <input type="email" ng-model="register_c.email" name="email" class="input-sm form-control fg-input">
+                            <label class="fg-label">Enter Email ID</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group fg-float">
+                        <div class="fg-line">
+                            <input type="password" ng-model="register_c.password" name="password" class="input-sm form-control fg-input">
+                            <label class="fg-label">Enter Password</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group fg-float">
+                        <div class="row fg-line">
+                            <div class="col-10">
+                                <input type="file" id="i_upload" class="form-control input-sm" onchange='angular.element(this).scope().add_file()' placeholder="Upload your profile picture here">
+                            </div>
+                            <div class="col-2">
+                                <input type="hidden" ng-model="register_c.img_path" name="img_path" class="form-control input-sm">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn palette-Teal bg">Sign up</button>
+                </form>
+                <div class="m-t-20">
+                    <a href="http://localhost:8585/login" data-bg="teal" class="palette-Teal text d-block m-b-5">Already have an account?</a>
+                    <a href="http://localhost:8585/forget_password" data-bg="teal" class="palette-Teal text">Forgot password?</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/app_routing.js"></script>
+</body>
+</html>

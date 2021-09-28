@@ -23,13 +23,15 @@
         };
     })
 }(angular));
+
 var app = angular.module("e_learning",["ui.router","ngLoadScript","oc.lazyLoad"]);
 app.controller("base_controller",function($scope, $state, $http, $httpParamSerializer){
     console.log($state.current.name);
     var state= $state.current.name;
     
-    var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjpbeyJpZCI6NDAsIm5hbWUiOiJLYWkgUGFya2VyIiwicm9sZSI6ImluIiwic3RhdHVzIjoiYSJ9XSwiZXhwIjoxNjMyMTI4NjY2fQ.Y3MKMV3DrgrvGU2imgXKd6IZhWmk_ou94HLTsYz8pls"
+    var token = localStorage.getItem("token")
     var host = "http://localhost:8080"
+
     
     $scope.details = {
         
@@ -47,7 +49,10 @@ app.controller("base_controller",function($scope, $state, $http, $httpParamSeria
             }
         }).then(function(res){
             console.log(res);
-            // $scope.courses = res;
+            swal("Good job!", "Course Added!", "success")
+            .then(function(){
+                location.reload();
+            });
         },function(error){
             console.log(error);
         })
@@ -57,9 +62,9 @@ app.controller("base_controller",function($scope, $state, $http, $httpParamSeria
 
     }
     $scope.add_video = function(){
-
+        console.log($scope.details_v);
         $http({
-            url: host+"/videos/create",
+            url: host+"/videos/create/"+$scope.course_id,
             method: "POST",
             data: $httpParamSerializer($scope.details_v),
             headers:{
@@ -68,13 +73,16 @@ app.controller("base_controller",function($scope, $state, $http, $httpParamSeria
             }
         }).then(function(res){
             console.log(res);
+            swal("Good job!", "Video Added!", "success")
+            .then(function(){
+                location.reload();
+            });
         },function(error){
             console.log(error);
         })
-        console.log($scope.details_v);
     }
 
-    $scope.add_file = function(){
+    $scope.add_c_thumbnail = function(){
         var file_input = document.getElementById("f_upload");
         console.log(file_input.files[0]);
         var fd = new FormData();
@@ -95,13 +103,13 @@ app.controller("base_controller",function($scope, $state, $http, $httpParamSeria
         })
     }
 
-    $scope.add_videoclip = function(){
-        var file_input = document.getElementById("v_upload");
+    $scope.add_v_thumbnail = function(){
+        var file_input = document.getElementById("t_upload");
         console.log(file_input.files[0]);
         var fd = new FormData();
         fd.append("file",file_input.files[0]);
         $http({
-            url: host+"/videos/upload_vdo",
+            url: host+"/courses/upload_thumbnail",
             method: "POST",
             data: fd,
             headers:{
@@ -109,7 +117,32 @@ app.controller("base_controller",function($scope, $state, $http, $httpParamSeria
             }
         }).then(function(res){
             console.log(res.data.filename);
-            $scope.details_v.videoclip = res.data.filename;
+            $scope.details_v.video_thumbnail = res.data.filename;
+            // console.log();
+        },function(error){
+            console.log(error);
+        })
+    }
+
+    $scope.add_videoclip = function(){
+        var file_input = document.getElementById("v_upload");
+        console.log(file_input.files[0]);
+        var fd = new FormData();
+        fd.append("file",file_input.files[0]);
+        console.log($scope.course_id);
+        $http({
+            url: host+"/videos/upload_vdo/"+$scope.course_id,
+            method: "POST",
+            data: fd,
+            headers:{
+                "Content-Type": undefined
+            },
+            processData: false,
+            mimeType: "multipart/form-data",
+            contentType: false
+        }).then(function(res){
+            console.log(res.data.filename);
+            $scope.details_v.video_path = res.data.filename;
             // console.log();
         },function(error){
             console.log(error);
@@ -215,19 +248,27 @@ app.controller("base_controller",function($scope, $state, $http, $httpParamSeria
     $scope.course_id = params.get("c_id");
     // console.log($scope.course_id);
 
-    $scope.readonly = "readonly";
-    $scope.disabled = "disabled";
+    $scope.is_disabled = true;
+    $scope.edit = false;
+    $scope.view = true;
+    $scope.update = true;
 
-    $scope.toggleReadonly = function(i){
-        if (i == 1){
-            $scope.readonly = "readonly";
-            $scope.disabled = "disabled";
-        } else {
-            $scope.readonly = "";
-            $scope.disabled = "";
+    $scope.toggleReadonly = function(action){
+        if (action=="enable"){
+            $scope.is_disabled= false;
+            $scope.edit = true;
+            $scope.view = false;
+            $scope.update = false;
         }
-        alert("hii");
-    }
+        else{
+            $scope.is_disabled= true;
+            $scope.edit = false;
+            $scope.view = true;
+            $scope.update = true;
+        }  
+    }  
+
+    
 
     $scope.edit_course = function(){
         console.log($scope.course_id);              
@@ -248,6 +289,44 @@ app.controller("base_controller",function($scope, $state, $http, $httpParamSeria
         });
         console.log($scope.course);  
     }
+
+    $scope.profile_pic = function(){
+        var file_input = document.getElementById("p_upload");
+        // console.log(file_input.files[0]);
+        var fd = new FormData();
+        fd.append("file",file_input.files[0]);
+        $http({
+            url: host+"/courses/upload_thumbnail",
+            method: "POST",
+            data: fd,
+            headers:{
+                "Content-Type": undefined
+            }
+        }).then(function(res){
+            console.log(res.data.filename);
+            $scope.register_c.img_path = res.data.filename;
+        },function(error){
+            console.log(error);
+        })
+    }
+
+    $scope.edit_profile = function(){
+        $http({
+            url: host+"/users/update",
+            method: "POST",
+            data: $httpParamSerializer($scope.my_profile),
+            headers: {
+                "Authorization":"Bearer "+token,
+                "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+            },
+            success:function(res){
+                console.log(res);
+                location.reload();
+            }
+        });
+        console.log($scope.my_profile);
+    };
+    
 
     
     $scope.edit_v = function(details_v){
@@ -286,27 +365,7 @@ app.controller("base_controller",function($scope, $state, $http, $httpParamSeria
     //     })
 
 
-    $scope.edit_profile = function(){
-        $http({
-            url: host+"/users/update",
-            method: "POST",
-            headers: {
-                "Authorization":"Bearer "+token,
-                "Content-Type": "application/x-www-form-urlencoded"
-            },
-            data: $httpParamSerializer($scope.my_profile),
-            success:function(res){
-                console.log(res);
-                swal("Good job!", "Profile Updated!", "success")
-                .then(function(){
-                    location.reload();
-                });
-            }
-        });
-        console.log($scope.my_profile);
-    };
     
-
     $scope.states={
         dashboard:function(){
             $http({
@@ -462,7 +521,7 @@ app.controller("login_ctrl",function($scope, $state, $http, $httpParamSerializer
     $scope.login = function(){
         console.log($scope.login_c);
         $http({
-            url: host+"/users/login_in",
+            url: host+"/users/login",
             method: "POST",
             data: $httpParamSerializer($scope.login_c),
             headers:{
@@ -477,4 +536,55 @@ app.controller("login_ctrl",function($scope, $state, $http, $httpParamSerializer
             console.log(error);
         })
     }
+
+    $scope.logout = function(){
+        localStorage.clear();
+        location.href="http://localhost:8585/login";
+    }
+
+    $scope.add_file = function(){
+        var file_input = document.getElementById("i_upload");
+        console.log(file_input.files[0]);
+        var fd = new FormData();
+        fd.append("file",file_input.files[0]);
+        $http({
+            url: host+"/courses/upload_thumbnail",
+            method: "POST",
+            data: fd,
+            headers:{
+                "Content-Type": undefined
+            }
+        }).then(function(res){
+            console.log(res.data.filename);
+            $scope.register_c.img_path = res.data.filename;
+        },function(error){
+            console.log(error);
+        })
+    }
+
+    $scope.register_c = {
+
+    }
+
+    $scope.register = function(){
+        $http({
+            url: host+"/users/create_in",
+            method: "POST",
+            data: $httpParamSerializer($scope.register_c),
+            headers:{
+                Authorization : "Bearer "+token,
+                "Content-Type": "application/x-www-form-urlencoded"
+            }
+        }).then(function(res){
+            console.log(res);
+            location.href="http://localhost:8585/"
+        },function(error){
+            console.log(error);
+        })
+    }
+
+    $scope.forget_password = function(){
+        alert("kjdjbb");
+    }
+    
 })

@@ -83,7 +83,8 @@ app.config(function($stateProvider,$locationProvider){
                 ])
             }]
         }
-    });$stateProvider.state({
+    });
+    $stateProvider.state({
         name:"deactivated_courses",
         url:"/deactivated_courses",
         controller:"base_controller",
@@ -103,7 +104,8 @@ app.config(function($stateProvider,$locationProvider){
                 ])
             }]
         }
-    });$stateProvider.state({
+    });
+    $stateProvider.state({
         name:"videos",
         url:"/videos",
         controller:"base_controller",
@@ -123,7 +125,8 @@ app.config(function($stateProvider,$locationProvider){
                 ])
             }]
         }
-    });$stateProvider.state({
+    });
+    $stateProvider.state({
         name:"my_profile",
         url:"/my_profile",
         controller:"base_controller",
@@ -144,7 +147,8 @@ app.config(function($stateProvider,$locationProvider){
                 ])
             }]
         }
-    });$stateProvider.state({
+    });
+    $stateProvider.state({
         name:"enrollments",
         url:"/enrollments",
         controller:"base_controller",
