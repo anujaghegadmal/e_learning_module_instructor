@@ -30,7 +30,7 @@ app.controller("base_controller",function($scope, $state, $http, $httpParamSeria
     var state= $state.current.name;
     
     var token = localStorage.getItem("token")
-    var host = "http://localhost:8080"
+    var host = "https://api.elearning.technoblocks.in"
 
     
     $scope.details = {
@@ -510,7 +510,7 @@ app.controller("base_controller",function($scope, $state, $http, $httpParamSeria
 
 app.controller("login_ctrl",function($scope, $state, $http, $httpParamSerializer){
 
-    var host = "http://localhost:8080"
+    var host = "https://api.elearning.technoblocks.in:8080"
 
     var token = localStorage.getItem("token")
 
@@ -531,7 +531,7 @@ app.controller("login_ctrl",function($scope, $state, $http, $httpParamSerializer
         }).then(function(res){
             console.log(res.data.payload);
             localStorage.setItem("token", res.data.payload);
-            location.href="http://localhost:8585/"
+            location.href="https://instructor.elearning.technoblocks.in:8585/"
         },function(error){
             console.log(error);
         })
@@ -539,7 +539,7 @@ app.controller("login_ctrl",function($scope, $state, $http, $httpParamSerializer
 
     $scope.logout = function(){
         localStorage.clear();
-        location.href="http://localhost:8585/login";
+        location.href="https://instructor.elearning.technoblocks.in:8585/login";
     }
 
     $scope.add_file = function(){
@@ -577,7 +577,7 @@ app.controller("login_ctrl",function($scope, $state, $http, $httpParamSerializer
             }
         }).then(function(res){
             console.log(res);
-            location.href="http://localhost:8585/"
+            location.href="https://instructor.elearning.technoblocks.in:8585/"
         },function(error){
             console.log(error);
         })
