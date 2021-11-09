@@ -26,7 +26,7 @@
             </li>
             <li><a href="/my_profile"><i class="zmdi zmdi-account-circle"></i> My Profile</a></li>
             <li><a href="/enrollments"><i class="zmdi zmdi-accounts-add"></i> Enrollments</a></li>
-            <li><a href="http://localhost:8580/login" ng-click="logout()"><i class="zmdi zmdi-power zmdi-hc-fw"></i> Logout</a></li>
+            <li><a href="https://instructor.elearning.technoblocks.in/login" ng-click="logout()"><i class="zmdi zmdi-power zmdi-hc-fw"></i> Logout</a></li>
         </ul>
     </aside>
 
@@ -53,7 +53,7 @@
             <div class="card-body card-padding">
                 <div id="course" class="row">
                     <div class='col-lg-4 col-xl-4'>
-                        <img style='height:170px' ng-model='course.course_img_thumbnail' alt='Course thumbnail' src='http://localhost:8080/{{course.course_img_thumbnail}}' alt=''> 
+                        <img style='height:170px' ng-model='course.course_img_thumbnail' alt='Course thumbnail' src='https://api.elearning.technoblocks.in/{{course.course_img_thumbnail}}' alt=''> 
                     </div>
                     <form ng-submit="edit_course()" id='course_d'>
                         <input type='hidden' name='course_img_thumbnail'>
@@ -168,7 +168,7 @@
                     <div id="video" class="col-lg-12 col-xl-12">
                         <div class='row'>
                             <div class='col-lg-4 col-xl-4'>
-                                <img style='height:170px' data-toggle='modal' data-target='#exampleModal5' src='http://localhost:8080/{{value.video_thumbnail}}' alt=''>
+                                <img style='height:170px' data-toggle='modal' data-target='#exampleModal5' src='https://api.elearning.technoblocks.in/{{value.video_thumbnail}}' alt=''>
                             </div>
                             <div class='col-lg-7 col-xl-7'>
                                 <div class='row'>

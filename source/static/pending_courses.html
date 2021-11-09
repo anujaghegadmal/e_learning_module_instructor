@@ -29,7 +29,7 @@
             </li>
             <li><a href="/my_profile"><i class="zmdi zmdi-account-circle"></i> My Profile</a></li>
             <li><a href="/enrollments"><i class="zmdi zmdi-accounts-add"></i> Enrollments</a></li>
-            <li><a href="http://localhost:8580/login" ng-click="logout()"><i class="zmdi zmdi-power zmdi-hc-fw"></i> Logout</a></li>
+            <li><a href="https://instructor.elearning.technoblocks.in/login" ng-click="logout()"><i class="zmdi zmdi-power zmdi-hc-fw"></i> Logout</a></li>
         </ul>
     </aside>
 
@@ -75,7 +75,7 @@
                         </tr> -->
                         <tr ng-repeat="course in p_courses">
                             <td>{{course.id}}</td>
-                            <td><img src='http://localhost:8080/{{course.course_img_thumbnail}}' style='height: 50px; width: 70px;'></img>
+                            <td><img src='https://api.elearning.technoblocks.in/{{course.course_img_thumbnail}}' style='height: 50px; width: 70px;'></img>
                             <td>{{course.course_name}}</td>                         
                             <td>{{course.course_description}}</td>
                             <td>₹ {{course.course_fees}}</td>
